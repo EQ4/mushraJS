@@ -10,36 +10,40 @@
     // check if necessary data is available
     if (isset($_POST['testresults']) && isset($_POST['testresultscsv']) && isset($_POST['username'])) {
     
-	    $testresults = trim($_POST['testresults']);
-	    $testresultscsv = trim($_POST['testresultscsv']);
-	    $username = trim($_POST['username']);
-	    
-   	    $filename = date("Ymd-Hi")."_".$username;
-	    $filenumber = 0;
-	
-	    while (file_exists($results_prefix.$filename."$filenumber".".txt")) {
-	        $filenumber++;
+            $testresults = trim($_POST['testresults']);
+            $testresultscsv = trim($_POST['testresultscsv']);
+            $username = trim($_POST['username']);
+            
+            $filename = date("Ymd-Hi")."_".$username;
+            $filenumber = 0;
+        
+            while (file_exists($results_prefix.$filename."$filenumber".".txt")) {
+                $filenumber++;
         }
-    	$filename = $filename."$filenumber".".txt";
-    	
-	    // write data
-	    $err1 = file_put_contents($results_prefix.$filename, $testresults."\n", FILE_APPEND);	
-	    $err2 = file_put_contents($results_prefix."allresults.txt", date("Ymd-Hi")."_".$testresultscsv."\n", FILE_APPEND);
-	
-	    if (($err1===false) || ($err2===false)) {
+        
+        $filename = $filename."$filenumber".".txt";
+        
+        // write data
+        $err1 = file_put_contents($results_prefix.$filename, $testresults."\n", FILE_APPEND);
+        $err2 = file_put_contents($results_prefix."allresults.txt", date("Ymd-Hi")."_".$testresultscsv."\n", FILE_APPEND);
+        
+        if (($err1===false) || ($err2===false)) {
             $return['error'] = true;
-            $return['message'] = "Error writing data!";    
-	    } else {
+            $return['message'] = "Error writing data!";
+        } else {
             $return['error'] = false;
             $return['message'] = "Data is saved!";    
-	    }
+        }
+        
     } else {
+    
         $return['error'] = true;
-        $return['message'] = "Invalid data sent!";    
+        $return['message'] = "Invalid data sent!";
+        
     }
     
     
-    // return 
+    // return
     echo json_encode($return);
 
 ?>
