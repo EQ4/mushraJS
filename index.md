@@ -2,6 +2,16 @@
 layout: default
 title: mushraJS
 ---      
+
+
+Attention
+====================
+
+mushraJS is now superseeded by BeaqleJS and won't be developed any further.
+
+Please check https://github.com/HSU-ANT/beaqlejs
+
+
       
  mushraJS
 =====================
